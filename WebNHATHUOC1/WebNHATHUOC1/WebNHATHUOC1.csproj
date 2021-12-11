@@ -267,6 +267,7 @@
     <Content Include="Views\HoaDon\FormAddHD.cshtml" />
     <Content Include="Views\HoaDon\FormDelHD.cshtml" />
     <Content Include="Views\Home\FormDangky.cshtml" />
+    <Content Include="Views\Home\FormDangnhap.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

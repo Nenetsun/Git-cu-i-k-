@@ -45,6 +45,44 @@ namespace WebNHATHUOC1.Controllers
             return View();
         }
 
+        #region Đăng nhập
+        public ActionResult FormDangnhap()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult loginNhanVien(string manv, string password)
+        {
+            bool flag = true;
+            if (ModelState.IsValid)
+            {
+                Models.NHANVIEN nv = null;
+                foreach (var a in db.NHANVIENs.Where(x => x.manv == manv))
+                {
+                    nv = a;
+                    if (a.password.ToString().Trim() != password.Trim())
+                        flag = false;
+                    break;
+                }
+                if (nv != null && flag == true)
+                {
+                    Session["User"] = nv;
+                    return RedirectToAction("Index");
+                }
+                else if (nv != null && flag == false)
+                    ModelState.AddModelError("password", "Sai mật khẩu!");
+                else if (nv == null)
+                    ModelState.AddModelError("manv", "Sai tên đăng nhập!");
+            }
+            return View("FormDangnhap");
+        }
+        public ActionResult logout()
+        {
+            Session["User"] = null;
+            return RedirectToAction("Index");
+        }
+        #endregion
+
         #region Đăng ký
         [HttpGet]
         public ActionResult FormDangky()

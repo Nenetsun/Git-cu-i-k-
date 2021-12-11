@@ -1,0 +1,64 @@
+﻿@model WebNHATHUOC1.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "FormDangnhap";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Đăng nhập tài khoản</h2>
+
+@using (Html.BeginForm("loginNhanVien", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal justify-content-center">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Tên tài khoản:</label>
+            <div class="col-md-10">
+                @Html.Editor("manv", new { htmlAttributes = new { @class = "form-control col-md-4" } })
+                @Html.ValidationMessage("manv", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Mật khẩu:</label>
+            <div class="col-md-10">
+                @Html.Password("password", "", new { @class = "form-control col-md-4" })
+                @Html.ValidationMessage("password", "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group justify-content-center">
+            <div class="row">
+                <div class="col-md-offset-2 col-md-2">
+                    <input type="submit" value="Đăng nhập" class="btn btn-primary" />
+                </div>
+                <div class="col-md-offset-2 col-md-2">
+                    @Html.ActionLink("Hủy bỏ", "Index", "Home", null, new { @class = "btn btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-horizontal justify-content-center">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend col-md-2">
+                <p class="input-group-text">Chưa có tài khoản?</p>
+            </div>
+            <div class="input-group-append">
+                @Html.ActionLink("Đăng ký", "FormDangKy", "Home", new { @class = "btn btn-success" })
+            </div>
+        </div>
+    </div>
+}
+
+@*<script type="text/javascript">
+    $().ready(function () {
+        $('#btndk').click(function () {
+            var url = '/Thuoc/FormDangKy/';
+            $.get(url, function () {});
+        });
+    })
+</script>*@
