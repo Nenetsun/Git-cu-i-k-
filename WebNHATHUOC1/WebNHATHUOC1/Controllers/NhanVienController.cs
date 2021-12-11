@@ -68,8 +68,8 @@ namespace WebNHATHUOC1.Controllers
                         ModelState.AddModelError("password2", "Xác nhận sai mật khẩu!");
                         return View("FormEditNV");
                     }
-                    //else
-                    //    a.password = password1;
+                    else
+                        a.password = password1;
                 }
                 else if(password1 != "" && password2 == "") 
                 {
