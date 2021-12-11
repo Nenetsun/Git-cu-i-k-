@@ -1,0 +1,79 @@
+﻿@model WebNHATHUOC1.Models.KHACHHANG
+
+@{
+    ViewBag.Title = "detailsKH";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Chi tiết Khách hàng</h2>
+
+<div>
+    <h4>Thông tin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sodt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenkh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenkh)
+        </dd>
+
+    </dl>
+    <br />
+    <h4>Lịch sử mua thuốc</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Số hóa đơn")
+            </th>
+            <th>
+                @Html.DisplayName("Tên nhân viên")
+            </th>
+            <th>
+                @Html.DisplayName("Ngày lập")
+            </th>
+            <th>
+                @Html.DisplayName("Thành tiền")
+            </th>
+            <th></th>
+        </tr>
+
+        @if (ViewBag.DSHD as List<WebNHATHUOC1.Models.HOADON> != null)
+        {
+            foreach (var item in ViewBag.DSHD as List<WebNHATHUOC1.Models.HOADON>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sohd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NHANVIEN.tennv)
+                    </td>
+                    <td>
+                        @{
+                            string ngaylap = item.ngaylap.ToShortDateString();
+                        }
+                        @ngaylap
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.thanhtien)
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "FormEditKH", new { Model.sodt }, null) |
+    @Html.ActionLink("Trở lại", "Index")
+</p>
