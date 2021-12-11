@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.NHANVIEN>
+
+@{
+    ViewBag.Title = "listNhanVien";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Danh sách Nhân viên</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CHINHANH.tenql)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tennv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sodt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.socm)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CHINHANH.tenql)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tennv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sodt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.socm)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "FormEditNV", new { item.manv },null) |
+            @Html.ActionLink("Chi tiết", "detailsNV", new { item.manv },null) |
+            @Html.ActionLink("Xóa", "FormDelNV", new { item.manv },null)
+        </td>
+    </tr>
+}
+
+</table>
