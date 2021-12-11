@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.KHACHHANG>
+
+@{
+    ViewBag.Title = "listKhachHang";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Danh sách Khách hàng</h2>
+
+<p>
+    @Html.ActionLink("Thêm khách hàng", "FormThemKH", null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sodt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenkh)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sodt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenkh)
+        </td>
+        <td>
+            @Html.ActionLink("Sửa", "FormEditKH", new { item.sodt }) |
+            @Html.ActionLink("Chi tiết", "detailsKH", new { item.sodt }) |
+            @Html.ActionLink("Xóa", "FormDelKH", new { item.sodt })
+        </td>
+    </tr>
+}
+
+</table>
