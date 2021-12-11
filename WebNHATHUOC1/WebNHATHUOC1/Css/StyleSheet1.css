@@ -1,0 +1,98 @@
+﻿
+.nen{
+    color: gray;
+    background-color: black;
+}
+.map{
+    color:red;
+}
+.phone{
+    color:forestgreen;
+}
+.email{
+    color:deeppink;
+}
+.sizeicon{
+   font-size:50px;
+}
+.fontweb{
+    font-size:30px;
+    color:deeppink;
+    background-color:white;
+}
+.tienich {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right: -266px !important;
+    margin-bottom: 215px !important;
+    font-weight: bold;
+    background-color: black;
+}
+.a {
+    font-size: 30px;
+}
+.b{
+    font-size:15px;
+}
+.tuvan {
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right: -266px !important;
+    margin-bottom: 215px !important;
+    font-weight: bold;
+    background-color: aqua;
+}
+.hotro {
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right:-266px !important;
+    margin-bottom: 215px !important;
+    
+    font-weight: bold;
+    background-color: yellow;
+}
+.khachhang {
+    font-size: 50px;
+    color: black;
+    text-align: center;
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right: -266px !important;
+    margin-bottom: 215px !important;
+    font-weight: bold;
+    background-color: green;
+    text-decoration-line: underline;
+}
+.kinhnghiem {
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right: -266px !important;
+    margin-bottom: 215px !important;
+    font-weight: bold;
+    background-color: black;
+    text-decoration-line: underline;
+}
+.hinhnen {
+    margin-left: -15px !important;
+    margin-top: -12px !important;
+    margin-right: -290px !important;
+}
+.logo {
+    font-weight: bold !important;
+    color: deeppink !important;
+    font-size: 50px !important;
+    background-color: dimgrey !important;
+  
+}

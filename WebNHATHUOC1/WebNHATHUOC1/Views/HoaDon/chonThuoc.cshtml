@@ -1,0 +1,68 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.THUOC>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NHACUNGCAP.tenncc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tenthuoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hansd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donvitinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dongia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hethan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.mota)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHACUNGCAP.tenncc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tenthuoc)
+        </td>
+        <td>
+            @{ 
+                string hansd = item.hansd.ToShortDateString();
+            }
+            @hansd
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.donvitinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dongia)
+        </td>
+        <td>
+            @{
+                if (item.hethan == true)
+                {
+                    <p>Đã hết hạn</p>
+                }
+                else
+                {
+                    <p>Còn hạn sử dụng</p>
+                }
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.mota)
+        </td>
+    </tr>
+}
+
+</table>

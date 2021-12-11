@@ -1,0 +1,107 @@
+﻿@model WebNHATHUOC1.Models.HOADON
+
+@{
+    ViewBag.Title = "FormDelHD";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>FormDelHD</h2>
+
+<h3>Xóa hóa đơn cùng với toàn bộ chi tiết hóa đơn?</h3>
+<div>
+    <h4>Thông tin Hóa đơn</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KHACHHANG.tenkh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KHACHHANG.tenkh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHANVIEN.tennv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHANVIEN.tennv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngaylap)
+        </dt>
+
+        <dd>
+            @{ 
+                string ngaylap = Model.ngaylap.ToShortDateString();
+            }
+            @ngaylap
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.thanhtien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.thanhtien)
+        </dd>
+
+    </dl>
+
+    <br />
+    <h4>Chi tiết hóa đơn</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Mã nhân viên");
+            </th>
+            <th>
+                @Html.DisplayName("Tên thuốc")
+            </th>
+            <th>
+                @Html.DisplayName("Đơn vị tính")
+            </th>
+            <th>
+                @Html.DisplayName("Đơn giá")
+            </th>
+            <th>
+                @Html.DisplayName("Số lượng")
+            </th>
+            <th>
+                @Html.DisplayName("Thành tiền")
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.DSCTHD as List<WebNHATHUOC1.Models.CHITIETHOADON>)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HOADON.manv)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.THUOC.tenthuoc)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.donvitinh)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dongia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.soluong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.thanhtien)
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="form-actions no-color">
+        @Html.ActionLink("Xác nhận", "xoaHD", new { Model.sohd}, new { @class="form-control btn-danger"}) |
+        @Html.ActionLink("Trở về", "Index", null, new { @class = "form-control btn-primary" })
+    </div>
+</div>

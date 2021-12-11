@@ -1,0 +1,76 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.CHITIETHOADON>
+
+@{
+    ViewBag.Title = "chitietHD";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Chi tiết hóa đơn</h2>
+<h4>
+    @{ 
+        string tam = Session["Mahd"] as string;
+    }
+    Mã hóa đơn: @tam
+</h4>
+<div class="form-control">
+    @Html.ActionLink("Thêm CTHD", "FormAddHD", null , new { @class="btn-primary"}) |
+    @Html.ActionLink("Trở về", "Index")
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HOADON.manv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.THUOC.tenthuoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donvitinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dongia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thanhtien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.HOADON.manv)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.THUOC.tenthuoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.donvitinh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dongia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.soluong)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thanhtien)
+        </td>
+        @{
+            WebNHATHUOC1.Models.NHANVIEN nv = Session["User"] as WebNHATHUOC1.Models.NHANVIEN;
+            string check = nv.manv.Substring(0, 2);
+            if (check == "QL")
+            {
+                <td>
+                    @Html.ActionLink("Sửa", "FormEditHD", new { item.sohd, item.mathuoc }, null) |
+                    @Html.ActionLink("Xóa", "delHD", new { item.sohd, item.mathuoc }, null)
+                </td>
+            }
+        }
+    </tr>
+}
+
+</table>

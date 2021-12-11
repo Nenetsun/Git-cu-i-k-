@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.HOADON>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Danh sách Hóa đơn</h2>
+
+<p>
+    @Html.ActionLink("Lập hóa đơn", "FormDonThuoc")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.sohd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.KHACHHANG.tenkh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NHANVIEN.tennv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ngaylap)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thanhtien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.sohd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.KHACHHANG.tenkh)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NHANVIEN.tennv)
+        </td>
+        <td>
+            @{ 
+                string ngaylap = item.ngaylap.ToShortDateString();
+            }
+            @ngaylap
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.thanhtien)
+        </td>
+        <td>
+            @Html.ActionLink("Chi tiết", "chitietHD", new { item.sohd }, null) |
+            @{
+                WebNHATHUOC1.Models.NHANVIEN nv = Session["User"] as WebNHATHUOC1.Models.NHANVIEN;
+                string check = nv.manv.Substring(0, 2);
+                if (check == "QL")
+                {
+                    @Html.ActionLink("Xóa", "FormDelHD", new { item.sohd }, null)
+                }
+            }
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<WebNHATHUOC1.Models.CHITIETHOADON>
+
+@{
+    ViewBag.Title = "FormDonThuoc";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Lập đơn thuốc</h2>
+
+<p>
+    @Html.ActionLink("Thêm thuốc", "FormChonThuoc", "HoaDon", new { @class = "btn btn-success" })
+    @Html.ValidationMessage("sohd", "", new { @class = "text-danger" })
+</p>
+@using (Html.BeginForm("themHoaDon", "HoaDon", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @if(Session["Mahd"] != null)
+        {
+            string tam = Session["Mahd"] as string;
+            <div class="form-control col-md-4">
+                <span>Mã hóa đơn: @tam</span>
+            </div>
+            <hr />
+        }
+        <div class="form-group">
+            @Html.Label("Ngày lập hóa đơn", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.Editor("ngaylap", "date", new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessage("ngaylap", "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+        <div class="form-group">
+            @Html.Label("Mã khách hàng", htmlAttributes: new { @class = "control-label col-md-12" })
+            <div class="col-md-12">
+                <div class="input-group mt-3 mb-3">
+                    <div class="input-group-prepend">
+                        @{
+                            SelectList dsKH = new SelectList(ViewBag.DSKH, "sodt", "sodt");
+                        }
+                        @Html.DropDownList("sodt", dsKH, new { @class = "custom-control custom-select" })
+                        <select id="tenkh" disabled>
+                            @foreach(var item in ViewBag.DSKH as List<WebNHATHUOC1.Models.KHACHHANG>)
+                            {
+                                <option value="@item.sodt">@item.tenkh</option>
+                            }
+                        </select>
+                    </div>
+                    @Html.ActionLink("Thêm khách hàng", "FormThemKH", "KhachHang", null, new { @class = "btn btn-success" })
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Hoàn tất đơn thuốc" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+<hr />
+<h4>Chi tiết hóa đơn</h4>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.mathuoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.donvitinh)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dongia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.thanhtien)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mathuoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.donvitinh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dongia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.soluong)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.thanhtien)
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "delThuoc", new { item.mathuoc }, null)
+            </td>
+        </tr>
+    }
+
+</table>
+<script type="text/javascript">
+    var jq = $.noConflict();
+    jq(document).ready(function () {
+        jq('#sodt').on({
+            focus: function () {
+                jq('#tenkh').val(jq(this).val());
+            },
+            change: function () {
+                jq('#tenkh').val(jq(this).val());
+            }
+        });
+    })
+</script>

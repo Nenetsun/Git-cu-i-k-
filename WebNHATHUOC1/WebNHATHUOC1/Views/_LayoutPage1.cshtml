@@ -1,0 +1,184 @@
+﻿    <!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/popper.min.js"></script>
+    <link href="~/CSS/StyleSheet1.css" rel="stylesheet" />
+
+  
+
+    <script src="https://kit.fontawesome.com/9ebce76500.js" crossorigin="anonymous"></script>
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header bg-secondary logo">
+                WEB NHÀ THUỐC
+                <i class="fas fa-air-freshener"></i>
+            </div>
+            <div class="card-title bg-info">
+                <div class="row">
+                    <div class="col-md-8">
+                        <ul class="nav list-group-horizontal">
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Trang chủ ", "Index", "Home", null, new { @Class = "text-white" })
+                            </li>
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Tiện ích", "Tienich", "Home", null, new { @Class = "text-white" })
+                            </li>
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Tư vấn", "Tuvan", "Home", null, new { @Class = "text-white" })
+                            </li>
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Hỗ trợ", "Hotro", "Home", null, new { @Class = "text-white" })
+                            </li>
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Khách hàng", "Khachhang", "Home", null, new { @Class = "text-white" })
+                            </li>
+                            <li class="nav-item list-group-item bg-primary ">
+                                @Html.ActionLink("Kinh nghiệm", "Kinhnghiem", "Home", null, new { @Class = "text-white" })
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <ul class="nav list-group-horizontal float-right">
+                            @if (Session["User"] == null)
+                            {
+                                <li class="nav-item list-group-item bg-primary ">
+                                    @Html.ActionLink("Đăng nhập", "FormDangnhap", "Home", null, new { @Class = "text-white" })
+                                </li>
+                                <li class="nav-item list-group-item bg-primary ">
+                                    @Html.ActionLink("Đăng ký", "FormDangky", "Home", null, new { @Class = "text-white" })
+                                </li>
+                            }
+                            else
+                            {
+                                WebNHATHUOC1.Models.NHANVIEN nv = Session["User"] as WebNHATHUOC1.Models.NHANVIEN;
+
+                                <li class="nav-item list-group-item bg-primary ">
+                                    <span>@nv.tennv</span>
+                                </li>
+                                <li class="nav-item list-group-item bg-primary ">
+                                    @Html.ActionLink("Đăng xuất", "logout", "Home", null, new { @Class = "text-white" })
+                                </li>
+                            }
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            @if (Session["User"] != null)
+            {
+                WebNHATHUOC1.Models.NHANVIEN nv = Session["User"] as WebNHATHUOC1.Models.NHANVIEN;
+                string check = nv.manv.Substring(0, 2);
+                if (check == "QL")
+                {
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <ul class="nav list-group">
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý nhân viên", "Index", "NhanVien", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý khách hàng", "Index", "KhachHang", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý hóa đơn", "Index", "HoaDon", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý thuốc", "Index", "Thuoc", null, new { @Class = "text-white" })
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-10">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <ul class="nav list-group">
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Lập đơn thuốc", "FormDonThuoc", "HoaDon", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý khách hàng", "Index", "KhachHang", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý hóa đơn", "Index", "HoaDon", null, new { @Class = "text-white" })
+                                    </li>
+                                    <li class="nav-item list-group-item bg-primary ">
+                                        @Html.ActionLink("Quản lý thuốc", "Index", "Thuoc", null, new { @Class = "text-white" })
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-10">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-md-10">
+                    @RenderBody()
+                </div>
+            }
+            <div class="card-title nen">
+                <div class="row">
+                    <ul class="col-md-4">
+                        <i class="fas fa-map-marker-alt map sizeicon"></i>
+                        Địa chỉ:
+                        <li class="col-md-12">
+                            25 đường số 5 phường 4 quận 8 tp hcm
+                        </li>
+                    </ul>
+                    <ul class="col-md-2">
+                        <i class="fas fa-phone-square-alt phone sizeicon"></i>
+                        Số điện thoại:
+                        <li class="col-md-12">
+                            0583434188
+                        </li>
+                    </ul>
+                    <ul class="col-md-3">
+                        <i class="fas fa-envelope-square email sizeicon"></i>
+                        Email:
+                        <li class="col-md-12">
+                            trangianghieu1999@gmail.com
+                        </li>
+                    </ul>
+                    <ul class="col-md-3">
+                        Các trang liên kết
+                        <li class="col-md-10">
+                            faccbook:
+                        </li>
+                        <li class="col-md-10">
+                            zalo:
+                        </li>
+                        <li class="col-md-10">
+                            intargam:
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+        </div>
+
+</body>
+</html>

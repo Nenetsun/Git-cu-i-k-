@@ -1,0 +1,63 @@
+﻿@model WebNHATHUOC1.Models.CHITIETHOADON
+
+@{
+    ViewBag.Title = "FormAddHD";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Form Thêm chi tiết hóa đơn</h2>
+
+
+@using (Html.BeginForm("addCTHD", "HoaDon", FormMethod.Post))
+{
+    <div class="row form-group">
+        <div class="input-group mt-3 mb-3 d-inline-flex col-md-9">
+            <span class="input-group-text">Mã hóa đơn</span>
+            @{
+                string tam = Session["Mahd"] as string;
+            }
+            <input type="text" readonly name="sohd" value="@tam" class="form-control" />
+            @*@Html.Editor("sohd", new { @class = "form-control" })*@
+            @{
+                SelectList dsThuoc = new SelectList(ViewBag.DSThuoc, "mathuoc", "mathuoc");
+            }
+            <span class="input-group-text">Mã thuốc</span>
+            @Html.DropDownList("mathuoc", dsThuoc, new { @class = "custom-control custom-select" })
+            <span class="input-group-text">Số lượng</span>
+            @Html.Editor("soluong", new { @class = "form-control" })
+            @Html.ValidationMessage("soluong", "", new { @class = "text-danger" })
+            <button class="btn btn-success col-md-1" type="submit">Thêm</button>
+        </div>
+    </div>
+    <div row>
+        @Html.ValidationMessage("sohd", "", new { @class = "text-danger" })
+        @Html.ValidationMessage("mathuoc", "", new { @class = "text-danger" })
+    </div>
+    <div class="row" id="dividThuoc">
+
+    </div>
+    <p>
+        @Html.ActionLink("Trở lại", "Index", "HoaDon")
+    </p>
+}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+<script type="text/javascript">
+    $().ready(function () {
+        $('#mathuoc').on({
+            click: function () {
+                var id = $('#mathuoc').val();
+                var url1 = '/HoaDon/chonThuoc/' + id;
+                $.get(url1, function (data) { $('#dividThuoc').html(data); });
+            },
+            change: function () {
+                var id = $('#mathuoc').val();
+                var url1 = '/HoaDon/chonThuoc/' + id;
+                $.get(url1, function (data) { $('#dividThuoc').html(data); });
+            }
+        });
+    })
+</script>
