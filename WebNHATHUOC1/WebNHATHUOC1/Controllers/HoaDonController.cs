@@ -190,18 +190,18 @@ namespace WebNHATHUOC1.Controllers
                 ds1.Add(a);
             }
             //Lỗi ràng buộc
-            //else if (b != null && b.mathuoc == a.mathuoc)
-            //{
-            //    ModelState.AddModelError("mathuoc", "Thuốc này đã có trong đơn!");
-            //    return View("FormChonThuoc", db.THUOCs.ToList());
-            //}
-            //else if (b == null)
-            //{
-            //    ModelState.AddModelError("sohd", "Số hóa đơn không đồng bộ!");
-            //    return View("FormChonThuoc", db.THUOCs.ToList());
-            //}
-            //ViewBag.DSKH = db.KHACHHANGs.ToList();
-            //return View("FormDonThuoc", Session["DSCTHD"] as List<Models.CHITIETHOADON>);
+            else if (b != null && b.mathuoc == a.mathuoc)
+            {
+                ModelState.AddModelError("mathuoc", "Thuốc này đã có trong đơn!");
+                return View("FormChonThuoc", db.THUOCs.ToList());
+            }
+            else if (b == null)
+            {
+                ModelState.AddModelError("sohd", "Số hóa đơn không đồng bộ!");
+                return View("FormChonThuoc", db.THUOCs.ToList());
+            }
+            ViewBag.DSKH = db.KHACHHANGs.ToList();
+            return View("FormDonThuoc", Session["DSCTHD"] as List<Models.CHITIETHOADON>);
         }
         [HttpPost]
         public ActionResult themHoaDon(string ngaylap, string sodt)
