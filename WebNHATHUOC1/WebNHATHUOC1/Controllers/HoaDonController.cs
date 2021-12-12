@@ -189,7 +189,6 @@ namespace WebNHATHUOC1.Controllers
             {
                 ds1.Add(a);
             }
-            //Lỗi ràng buộc
             else if (b != null && b.mathuoc == a.mathuoc)
             {
                 ModelState.AddModelError("mathuoc", "Thuốc này đã có trong đơn!");
