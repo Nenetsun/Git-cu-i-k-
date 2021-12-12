@@ -28,7 +28,7 @@ namespace WebNHATHUOC1.Controllers
                 if(db.KHACHHANGs.Find(kh.sodt) == null)
                 {
                     db.KHACHHANGs.Add(kh);
-                    db.SaveChanges();
+                    //db.SaveChanges();
                     RedirectToAction("Index", "KhachHang");
                 }
                 else

@@ -1,0 +1,135 @@
+﻿@model WebNHATHUOC1.Models.NHANVIEN
+
+@{
+    ViewBag.Title = "detailsNV";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Chi tiết Nhân viên</h2>
+
+<div>
+    <h4>Thông tin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @{
+            string check = Model.manv.Substring(0, 2);
+            if (check == "NV")
+            {
+                <dt>
+                    @Html.DisplayName("Chức vụ")
+                </dt>
+
+                <dd>
+                    @Html.DisplayName("Nhân viên")
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CHINHANH.tenql)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CHINHANH.tenql)
+                </dd>
+            }
+            else
+            {
+                <dt>
+                    @Html.DisplayName("Chức vụ")
+                </dt>
+
+                <dd>
+                    @Html.DisplayName("Quản lý")
+                </dd>
+            }
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tennv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tennv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sodt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sodt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.socm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.socm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.diachi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.diachi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.password)
+        </dd>
+
+    </dl>
+    <br />
+    <h4>Lịch sử hóa đơn</h4>
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Số hóa đơn")
+            </th>
+            <th>
+                @Html.DisplayName("Tên khách hàng")
+            </th>
+            <th>
+                @Html.DisplayName("Ngày lập")
+            </th>
+            <th>
+                @Html.DisplayName("Thành tiền")
+            </th>
+            <th></th>
+        </tr>
+        @if (ViewBag.DSHD as List<WebNHATHUOC1.Models.HOADON> != null)
+        {
+            foreach (var item in ViewBag.DSHD as List<WebNHATHUOC1.Models.HOADON>)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sohd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.KHACHHANG.tenkh)
+                    </td>
+                    <td>
+                        @{
+                            string ngaylap = item.ngaylap.ToShortDateString();
+                        }
+                        @ngaylap
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.thanhtien)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "FormEditNV", new { Model.manv }) |
+    @Html.ActionLink("Trở về", "Index")
+</p>
