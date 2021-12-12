@@ -22,44 +22,44 @@ namespace WebNHATHUOC1.Controllers
             Session["Mahd"] = sohd;
             return View(db.CHITIETHOADONs.Where(x => x.sohd == sohd));
         }
-        //public ActionResult FormDelHD(string sohd)
-        //{
-        //    Session["Mahd"] = sohd;
-        //    ViewBag.DSCTHD = db.CHITIETHOADONs.Where(x => x.sohd == sohd).ToList();
-        //    return View(db.HOADONs.Find(sohd));
-        //}
-        //[HttpGet]
-        //public ActionResult xoaHD(string sohd)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        Models.HOADON a = db.HOADONs.Find(sohd);
-        //        List<Models.CHITIETHOADON> cthd = db.CHITIETHOADONs.Where(x => x.sohd == sohd).ToList();
-        //        foreach(var item in cthd)
-        //        {
-        //            db.CHITIETHOADONs.Remove(item);
-        //        }
-        //        db.HOADONs.Remove(a);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View("Index");
-        //}
+        public ActionResult FormDelHD(string sohd)
+        {
+            Session["Mahd"] = sohd;
+            ViewBag.DSCTHD = db.CHITIETHOADONs.Where(x => x.sohd == sohd).ToList();
+            return View(db.HOADONs.Find(sohd));
+        }
+        [HttpGet]
+        public ActionResult xoaHD(string sohd)
+        {
+            if (ModelState.IsValid)
+            {
+                Models.HOADON a = db.HOADONs.Find(sohd);
+                List<Models.CHITIETHOADON> cthd = db.CHITIETHOADONs.Where(x => x.sohd == sohd).ToList();
+                foreach (var item in cthd)
+                {
+                    db.CHITIETHOADONs.Remove(item);
+                }
+                db.HOADONs.Remove(a);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View("Index");
+        }
         #region Xử lý CTHD
-        //public ActionResult delHD(string sohd, string mathuoc)
-        //{
-        //    List<Models.CHITIETHOADON> tam = db.CHITIETHOADONs.Where(x => x.sohd == sohd && x.mathuoc == mathuoc).ToList();
-        //    if (tam.Count > 0)
-        //    {
-        //        db.CHITIETHOADONs.Remove(tam[0]);
-        //        Models.HOADON hd = db.HOADONs.Find(sohd);
-        //        hd.thanhtien = hd.CHITIETHOADONs.Sum(x => x.soluong * x.dongia);
-        //        db.SaveChanges();
-        //        Session["Mahd"] = null;
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View("chitietHD");
-        //}
+        public ActionResult delHD(string sohd, string mathuoc)
+        {
+            List<Models.CHITIETHOADON> tam = db.CHITIETHOADONs.Where(x => x.sohd == sohd && x.mathuoc == mathuoc).ToList();
+            if (tam.Count > 0)
+            {
+                db.CHITIETHOADONs.Remove(tam[0]);
+                Models.HOADON hd = db.HOADONs.Find(sohd);
+                hd.thanhtien = hd.CHITIETHOADONs.Sum(x => x.soluong * x.dongia);
+                db.SaveChanges();
+                Session["Mahd"] = null;
+                return RedirectToAction("Index");
+            }
+            return View("chitietHD");
+        }
         public ActionResult FormAddHD()
         {
             ViewBag.DSThuoc = db.THUOCs.ToList();
@@ -95,32 +95,32 @@ namespace WebNHATHUOC1.Controllers
             ViewBag.DSThuoc = db.THUOCs.ToList();
             return View("FormAddHD");
         }
-        //[HttpGet]
-        //public ActionResult FormEditHD(string sohd, string mathuoc)
-        //{
-        //    return View(db.CHITIETHOADONs.Where(x => x.sohd == sohd && x.mathuoc == mathuoc).ToList()[0]);
-        //}
-        //[HttpPost]
-        //public ActionResult editHD(Models.CHITIETHOADON cthd)
-        //{
-        //    if(ModelState.IsValid)
-        //    {
-        //        Models.CHITIETHOADON a = db.CHITIETHOADONs.Where(x => x.sohd == cthd.sohd && x.mathuoc == cthd.mathuoc).ToList()[0];
-        //        if(a != null)
-        //        {
-        //            a.donvitinh = cthd.donvitinh;
-        //            a.soluong = cthd.soluong;
-        //            a.dongia = cthd.dongia;
-        //            a.thanhtien = a.dongia * a.soluong;
-        //            Models.HOADON hd = db.HOADONs.Find(a.sohd);
-        //            hd.thanhtien = hd.CHITIETHOADONs.Sum(x => x.soluong * x.dongia);
-        //            db.SaveChanges();
-        //            Session["Mahd"] = null;
-        //            return RedirectToAction("Index");
-        //        }
-        //    }
-        //    return View("FormEditHD", cthd);
-        //}
+        [HttpGet]
+        public ActionResult FormEditHD(string sohd, string mathuoc)
+        {
+            return View(db.CHITIETHOADONs.Where(x => x.sohd == sohd && x.mathuoc == mathuoc).ToList()[0]);
+        }
+        [HttpPost]
+        public ActionResult editHD(Models.CHITIETHOADON cthd)
+        {
+            if (ModelState.IsValid)
+            {
+                Models.CHITIETHOADON a = db.CHITIETHOADONs.Where(x => x.sohd == cthd.sohd && x.mathuoc == cthd.mathuoc).ToList()[0];
+                if (a != null)
+                {
+                    a.donvitinh = cthd.donvitinh;
+                    a.soluong = cthd.soluong;
+                    a.dongia = cthd.dongia;
+                    a.thanhtien = a.dongia * a.soluong;
+                    Models.HOADON hd = db.HOADONs.Find(a.sohd);
+                    hd.thanhtien = hd.CHITIETHOADONs.Sum(x => x.soluong * x.dongia);
+                    db.SaveChanges();
+                    Session["Mahd"] = null;
+                    return RedirectToAction("Index");
+                }
+            }
+            return View("FormEditHD", cthd);
+        }
         #endregion
 
         #region Chọn thuốc
@@ -188,16 +188,17 @@ namespace WebNHATHUOC1.Controllers
             {
                 ds1.Add(a);
             }
-            else if (b != null && b.mathuoc == a.mathuoc)
-            {
-                ModelState.AddModelError("mathuoc", "Thuốc này đã có trong đơn!");
-                return View("FormChonThuoc", db.THUOCs.ToList());
-            }
-            else if (b == null)
-            {
-                ModelState.AddModelError("sohd", "Số hóa đơn không đồng bộ!");
-                return View("FormChonThuoc", db.THUOCs.ToList());
-            }
+            //Lỗi ràng buộc
+            //else if (b != null && b.mathuoc == a.mathuoc)
+            //{
+            //    ModelState.AddModelError("mathuoc", "Thuốc này đã có trong đơn!");
+            //    return View("FormChonThuoc", db.THUOCs.ToList());
+            //}
+            //else if (b == null)
+            //{
+            //    ModelState.AddModelError("sohd", "Số hóa đơn không đồng bộ!");
+            //    return View("FormChonThuoc", db.THUOCs.ToList());
+            //}
             ViewBag.DSKH = db.KHACHHANGs.ToList();
             return View("FormDonThuoc", Session["DSCTHD"] as List<Models.CHITIETHOADON>);
         }
