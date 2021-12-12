@@ -162,6 +162,7 @@ namespace WebNHATHUOC1.Controllers
         #region Lập đơn thuốc
         public ActionResult FormDonThuoc()
         {
+            Session["Mahd"] = null;
             List<Models.CHITIETHOADON> ds = Session["DSCTHD"] as List<Models.CHITIETHOADON>;
             ViewBag.DSKH = db.KHACHHANGs.ToList();
             return View(ds);
@@ -174,7 +175,7 @@ namespace WebNHATHUOC1.Controllers
             Models.CHITIETHOADON a = new CHITIETHOADON();
             a.sohd = sohd;
             a.mathuoc = mathuoc;
-            a.soluong = Byte.Parse(soluong);
+            a.soluong = Byte.Parse(soluong==null?soluong:"1");
             a.donvitinh = db.THUOCs.Find(a.mathuoc).donvitinh;
             a.dongia = db.THUOCs.Find(a.mathuoc).dongia;
             a.thanhtien = a.dongia * a.soluong;
@@ -199,8 +200,8 @@ namespace WebNHATHUOC1.Controllers
             //    ModelState.AddModelError("sohd", "Số hóa đơn không đồng bộ!");
             //    return View("FormChonThuoc", db.THUOCs.ToList());
             //}
-            ViewBag.DSKH = db.KHACHHANGs.ToList();
-            return View("FormDonThuoc", Session["DSCTHD"] as List<Models.CHITIETHOADON>);
+            //ViewBag.DSKH = db.KHACHHANGs.ToList();
+            //return View("FormDonThuoc", Session["DSCTHD"] as List<Models.CHITIETHOADON>);
         }
         [HttpPost]
         public ActionResult themHoaDon(string ngaylap, string sodt)
