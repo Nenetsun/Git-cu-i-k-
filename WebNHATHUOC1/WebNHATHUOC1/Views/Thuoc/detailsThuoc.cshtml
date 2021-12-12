@@ -1,0 +1,94 @@
+﻿@model WebNHATHUOC1.Models.THUOC
+
+@{
+    ViewBag.Title = "detailsThuoc";
+    Layout = "~/Views/_LayoutPage1.cshtml";
+}
+
+<h2>Chi tiết Thuốc</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.mathuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mathuoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NHACUNGCAP.tenncc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHACUNGCAP.tenncc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tenthuoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tenthuoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hansd)
+        </dt>
+
+        <dd>
+            @{
+                string hansd = Model.hansd.ToShortDateString();
+            }
+            @hansd
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donvitinh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donvitinh)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dongia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dongia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hethan)
+        </dt>
+
+        <dd>
+            @{
+                if (Model.hethan == true)
+                {
+                    <p>Đã hết hạn</p>
+                }
+                else
+                {
+                    <p>Còn hạn sử dụng</p>
+                }
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mota)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mota)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "FormEditThuoc", new { id = Model.mathuoc }) |
+    @Html.ActionLink("Trở về", "Index")
+</p>
